@@ -1,0 +1,12 @@
+config.vm.provider :virtualbox do |v|
+  v.customize ["modifyvm", :id, "--memory", 4096]
+  v.customize ["modifyvm", :id, "--cpus", 4]
+end
+
+# Install Vagrant-triggers
+if ! defined? VagrantPlugins::Triggers
+  config.vm.provision :shell, inline: "vagrant plugin install vagrant-triggers"
+end
+
+# Change permissions to rvm
+# chmod -R a+xwr /usr/local/rvm/
