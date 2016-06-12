@@ -52,11 +52,12 @@ extra_npm_install() {
 zshell_install() {
   # Install zss
   if not_installed "zsh"; then
-    echo "Installing zshell"
-    apt-get -y install zsh
   fi
-
+  # Install zshell
+  echo "Installing zshell"
+  apt-get -y install zsh
   # Install oh-my-zsh
+  echo "Installing oh-my-zsh"
   wget https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh -O - | zsh
 
   # Change shell to zsh
@@ -65,7 +66,15 @@ zshell_install() {
   fi
 }
 
+install_vvv_dashboard() {
+  # VVV_Dashboard
+  # Documentation: https://github.com/topdown/VVV-Dashboard
+  git clone https://github.com/topdown/VVV-Dashboard.git /srv/www/default/dashboard
+  cp /srv/www/default/dashboard/dashboard-custom.php /srv/www/default/
+}
+
 # Run scripts
 zshell_install
 extra_apt_packages_install
 extra_npm_install
+install_vvv_dashboard
